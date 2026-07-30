@@ -1,0 +1,22 @@
+[package]
+name = "qq-wayland-clipboard"
+version = "0.1.0"
+edition = "2024"
+description = "Clipboard compatibility wrapper for Linux QQ on Wayland"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/w568w/qq-wayland-clipboard"
+homepage = "https://github.com/w568w/qq-wayland-clipboard"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+image = { version = "0.25", default-features = false, features = ["bmp", "gif", "ico", "jpeg", "png", "tiff", "webp"] }
+quick-xml = "0.41"
+rustix = { version = "1", features = ["process"] }
+signal-hook = { version = "0.4", default-features = false, features = ["iterator"] }
+url = "2.5"
+wayland-client = "0.31"
+wayland-protocols = { version = "0.32", features = ["client", "staging"] }
+wayland-protocols-wlr = { version = "0.3", features = ["client"] }
+wl-clipboard-rs = "0.9.3"
+x11rb = { version = "0.13.2", features = ["xfixes"] }
