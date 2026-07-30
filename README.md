@@ -21,7 +21,7 @@ sudo pacman -S xorg-server-xvfb
 从源码安装：
 
 ```bash
-cargo install --path .
+cargo install --git https://github.com/w568w/qq-wayland-clipboard
 ```
 
 如果只需构建当前工作区：
