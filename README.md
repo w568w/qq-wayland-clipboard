@@ -12,22 +12,20 @@ QQ 的窗口虽然运行在 Wayland 上，部分剪贴板功能仍由隐藏的 X
 - 支持 `ext-data-control` 或 `wlr-data-control` 的 compositor；
 - 系统中可用的 `Xvfb` 命令。
 
-Arch Linux 可通过以下命令安装 Xvfb：
+### 1.1. Arch Linux AUR
+
+Arch Linux 可通过以下命令安装：
 
 ```bash
-sudo pacman -S xorg-server-xvfb
+yay -S qq-wayland-clipboard-git
 ```
 
-从源码安装：
+### 1.2. 从源码安装
+
+对于其他发行版，可以从源码安装：
 
 ```bash
 cargo install --git https://github.com/w568w/qq-wayland-clipboard
-```
-
-如果只需构建当前工作区：
-
-```bash
-cargo build --release
 ```
 
 ## 2. 使用
