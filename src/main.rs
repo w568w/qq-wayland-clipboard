@@ -471,9 +471,8 @@ fn mirror(
         return Ok(());
     }
 
-    // Case 2: Handle QQ rich text by reordering the MIME types to ensure that QQ rich text is mirrored first, followed by plain text and HTML.
-    // So that even unsupported applications can still get the plain text rather than HTML source or nothing.
-    if !offered.contains(&targets.qq_rich) {
+    // Case 2: Handle text, preferring QQ rich text before its plain text and HTML fallbacks.
+    if !offered.contains(&targets.qq_rich) && !offered.contains(&targets.text) {
         eprintln!(
             "left unsupported X11 clipboard owner unchanged: {}",
             job.owner.id()
@@ -521,7 +520,7 @@ fn mirror(
     }
     let count = sources.len();
     if publish(clipboard, job, x_generation, wayland_generation, sources)? {
-        eprintln!("mirrored QQ rich clipboard: {count} MIME types");
+        eprintln!("mirrored text clipboard: {count} MIME types");
     }
     Ok(())
 }
