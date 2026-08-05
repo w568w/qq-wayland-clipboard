@@ -42,6 +42,12 @@ qq-wayland-clipboard /opt/QQ/qq
 qq-wayland-clipboard /opt/QQ/qq --enable-logging
 ```
 
+如果 Xvfb 无法自动分配 DISPLAY 号（例如部分 WSL 环境），可以在 QQ 路径前指定一个未占用的号码：
+
+```bash
+qq-wayland-clipboard --display 99 /opt/QQ/qq
+```
+
 wrapper 在前台运行并管理 QQ 和 Xvfb 的生命周期。按 Ctrl+C 可停止整个实例。
 
 ## 3. 支持范围

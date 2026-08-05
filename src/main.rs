@@ -207,6 +207,10 @@ impl Drop for ChildGuard {
 #[derive(Parser)]
 #[command(about = "Launch Linux QQ with Wayland clipboard compatibility")]
 struct Cli {
+    /// Use a fixed Xvfb display number instead of allocating one automatically
+    #[arg(long, value_name = "NUMBER")]
+    display: Option<u16>,
+
     #[arg(value_name = "QQ")]
     qq: OsString,
 
@@ -225,6 +229,7 @@ enum LaunchEvent {
 
 fn main() -> Result<()> {
     let Cli {
+        display: requested_display,
         qq: qq_command,
         qq_args,
     } = Cli::parse();
@@ -234,7 +239,11 @@ fn main() -> Result<()> {
     let (events, event_receiver) = mpsc::channel();
 
     // Child Process 1: Start a dummy X server to isolate QQ from the real X11 clipboard so it doesn't interfere with other clipboards.
-    let child = Command::new("Xvfb")
+    let mut xvfb = Command::new("Xvfb");
+    if let Some(number) = requested_display {
+        xvfb.arg(format!(":{number}"));
+    }
+    let child = xvfb
         .args(["-displayfd", "1"])
         .args(["-nolisten", "tcp"])
         .args(["-screen", "0", "1x1x24"])
